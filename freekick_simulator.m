@@ -29,9 +29,17 @@ X = [-1  -1   1   1  -1; -1  -1   1   1  -1]*l;
 Y = [2.42  3.42   3.42  2.42  2.42; 2.42   3.42   3.42  2.42  2.42]*w;
 Z = [ 1   1   1   1   1;  0   0   0   0   0]*h;
 figure(1)
-surf(X, Y, Z)                                           % Plot Walls
+surf(X, Y, Z)                                           % Plot Walls post
 hold on
-patch(X(1,:), Y(1,:), Z(1,:), 'y')                      % Plot Flat Roof
+patch(X(1,:), Y(1,:), Z(1,:), 'y')                     
+
+wX = [-1  -1   1   1  -1; -1  -1   1   1  -1]*5;
+wY = [2  3   3  2  2; 2   3   3  2  2]*0.5;
+wZ = [ 1   1   1   1   1;  0   0   0   0   0]*5;
+
+surf(wX, wY, wZ)                                           % Plot Wall of meat
+patch(X(1,:) + 15, Y(1,:) + 20, Z(1,:), 'y')            
+
 hold off
 grid on
 axis equal
