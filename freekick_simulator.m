@@ -1,4 +1,3 @@
-
 ballsWeight=[[340,69],[390,69],[450,68.83185 ]];
  	 
 clear;
@@ -24,10 +23,10 @@ Vb2 = (Vf1 * (foot_mass * (1+ e)) + Vb1 * (ball_mass - e * foot_mass)) / (foot_m
 
 %goal post
 l =  8;                                                 % Length
-w =  7.3;                                                 % Width
+w = 7.3;                                                 % Width
 h = 8;                                                 % Height
 X = [-1  -1   1   1  -1; -1  -1   1   1  -1]*l;
-Y = [3   5   5  3  3; 3   5   5  3  3]*w;
+Y = [2.42  3.42   3.42  2.42  2.42; 2.42   3.42   3.42  2.42  2.42]*w;
 Z = [ 1   1   1   1   1;  0   0   0   0   0]*h;
 figure(1)
 surf(X, Y, Z)                                           % Plot Walls
@@ -36,4 +35,4 @@ patch(X(1,:), Y(1,:), Z(1,:), 'y')                      % Plot Flat Roof
 hold off
 grid on
 axis equal
-axis([-25  25    -40.3  40.3    0  9])
+axis([-40.3  40.3 -25  25        0  9])
