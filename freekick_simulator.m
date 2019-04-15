@@ -31,7 +31,8 @@ Z = [ 1   1   1   1   1;  0   0   0   0   0]*h;
 figure(1)
 surf(X, Y, Z)                                           % Plot Walls post
 hold on
-patch(X(1,:), Y(1,:), Z(1,:), 'y')                     
+patch(X(1,:), Y(1,:), Z(1,:), 'y')               
+
 
 wX = [-1  -1   1   1  -1; -1  -1   1   1  -1]*5;
 wY = [2  3   3  2  2; 2   3   3  2  2]*0.5;
@@ -44,3 +45,6 @@ hold off
 grid on
 axis equal
 axis([-40.3  40.3 -25  25        0  9])
+hold on
+p = [2 40 10];
+plot3([0 p(1)], [-40 p(2)], [0, p(3)]);
