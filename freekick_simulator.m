@@ -44,16 +44,15 @@ patch(X(1,:) + 15, Y(1,:) + 20, Z(1,:), 'y')
 
 grid on
 axis equal
-%axis([-40.3  40.3 -25  25        0  9])
-axis([-100 100 -100 100 -100 100]);
+axis([-40.3  40.3 -25  25 0 30])
 hold on
-p = [2 40 10];
-plot3([0 p(1)], [-40 p(2)], [0, p(3)]);
 
 %Label Graph
 xlabel('X');
 ylabel('Y');
 zlabel('Z');
+
+y_initial = -25;
 
 % Calculate the Velocity respect to angle
 vx = -30;
@@ -62,7 +61,7 @@ v0z = Vb2 * sind(45);
 vz = v0z-G*t;
 
 x = vx*t;
-y = v0y.*t;
+y = y_initial+v0y.*t ;
 z = v0z.*t-0.5*G*(t.^2);
 
 plot3(linspace(0,0,length(y)),y,z,'-b');
