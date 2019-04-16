@@ -1,4 +1,4 @@
-ballsWeight=[[340,69],[390,69],[450,6.883185 ]];
+ballsWeightAndMass=[46.99,5.893,6.883185 ];
  	 
 clear;
 
