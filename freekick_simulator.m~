@@ -1,4 +1,4 @@
-ballsWeight=[[340,69],[390,69],[450,6.883185 ]];
+ballsWeight=[[340,69],[390,69],[450,0.06883185 ]];
  	 
 clear;
 
@@ -15,7 +15,7 @@ G = 9.81;              % Gravity
 D = AD * DC * cross_section; % Drag Calculation
 t = 0:0.1:15; % Time
 
-ball_mass = 6.8;      % Mass of the Ball (varies in size)
+ball_mass = 6.8*4;      % Mass of the Ball (varies in size)
 foot_mass = 1.43;      % Mass of the Foot
 e = 0.68;       % Coefficient 
 Vf2 = 1;            % Velocity of the foot after Kick
