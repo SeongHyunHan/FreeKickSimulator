@@ -5,18 +5,20 @@ clear;
 disp("Free Kick Simulator");
 
 % Get input from the user
+Vf1_input = input('Enter velocity for the kick: ');
 
 % Constant Variable
 AD = 1.2;       % Air Density at Sea Level (kg/m^3)
 DC = 0.8;       % Drag Coefficient
 cross_section = 0.1;  % Cross section area of a soccer ball (varies in size)
-G = 1;              % Gravity
+G = 9.81;              % Gravity
 D = AD * DC * cross_section; % Drag Calculation
+t = 0:0.1:1; % Time
 
 ball_mass = 2;      % Mass of the Ball (varies in size)
 foot_mass = 1.43;      % Mass of the Foot
 e = 0.68;       % Coefficient 
-Vf1 = 1;            % Velocity of the foot before Kick
+Vf1 = str2double(Vf1_input);            % Velocity of the foot before Kick
 Vf2 = 1;            % Velocity of the foot after Kick
 Vb1 = 0;        % Velocity of the ball before Kick (Constant value 0)
 Vb2 = (Vf1 * (foot_mass * (1+ e)) + Vb1 * (ball_mass - e * foot_mass)) / (foot_mass + ball_mass); % Velocity of the ball after Kick
@@ -41,10 +43,26 @@ wZ = [ 1   1   1   1   1;  0   0   0   0   0]*5;
 surf(wX, wY, wZ)                                           % Plot Wall of meat
 patch(X(1,:) + 15, Y(1,:) + 20, Z(1,:), 'y')            
 
-hold off
+
 grid on
 axis equal
-axis([-40.3  40.3 -25  25        0  9])
+axis([-40.3  40.3 -25  25        0  9]) 
 hold on
 p = [2 40 10];
 plot3([0 p(1)], [-40 p(2)], [0, p(3)]);
+
+% Calculate the Velocity respect to angle
+vx = 1;
+v0y = Vb2 * cosd(45);
+v0z = Vb2 * sind(45);
+vz = v0z-G*t;
+
+x = vx*t;
+y = v0y.*t;
+z = v0z.*t-0.5*G*(t.^2);
+
+plot3(linspace(0,0,length(y)),y,z,'-b');
+
+% Calculate the position
+
+% Then plot 3D
