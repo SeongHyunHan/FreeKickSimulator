@@ -56,8 +56,8 @@ y_initial = -25;
 
 % Calculate the Velocity respect to angle
 vx = -30;
-v0y = Vb2 * cosd(45);
-v0z = Vb2 * sind(45);
+v0y = Vb2 * cosd(30);
+v0z = Vb2 * sind(30);
 vz = v0z-G*t;
 
 x = vx*t;
