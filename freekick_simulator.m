@@ -17,8 +17,12 @@ ballSize5.cross_ref=0.036644;
 ballSize5.sized=21.6;
 ballSize4.sized=20.3;
 ballSize3.sized=18.8;
-
-bsizes=[ballSize3.sized,ballSize4.sized,ballSize5.sized]
+% ball color
+ballSize5.color='r';
+ballSize4.color='b';
+ballSize3.color='g';
+balls=[ballSize3;ballSize4;ballSize5];
+% bsizes=[ballSize3.sized,ballSize4.sized,ballSize5.sized];
 disp("Free Kick Simulator");
 
 % Get input from the user
@@ -29,12 +33,12 @@ d_angle = input('Enter the angle for direction of the kick: ');
 % Constant Variable
 AD = 1.2;       % Air Density at Sea Level (kg/m^3)
 DC = 0.25;       % Drag Coefficient
-cross_section =[ballSize3.cross_ref	; ballSize4.cross_ref;ballSize5.cross_ref];  % Cross section area of a soccer ball
+% cross_section =[ballSize3.cross_ref	; ballSize4.cross_ref;ballSize5.cross_ref];  % Cross section area of a soccer ball
 G = 9.81;              % Gravity
 % D = 1/2*AD * DC * cross_section; % Drag Calculation
 t = 0:0.1:3; % Time
 
-ball_mass = [ballSize3.mass; ballSize4.mass; ballSize5.mass ];      % Mass of the Ball (varies in size)
+% ball_mass = [ballSize3.mass; ballSize4.mass; ballSize5.mass ];      % Mass of the Ball (varies in size)
 foot_mass = 1.43;      % Mass of the Foot
 e = 0.68;       % Coefficient 
 Vf2 = 1;            % Velocity of the foot after Kick
@@ -74,9 +78,9 @@ y_initial = -25;
 
 for j = 1:3
     % Calculate the Velocity respect to angle
-    Vb2 = (Vf1 * (foot_mass * (1+ e)) + Vb1 * (ball_mass(j) - e * foot_mass)) / (foot_mass + ball_mass(j)); % Velocity of the ball after Kick
+    Vb2 = (Vf1 * (foot_mass * (1+ e)) + Vb1 * (balls(j).mass - e * foot_mass)) / (foot_mass + balls(j).mass); % Velocity of the ball after Kick
  
-    D= 1/2*((AD *(Vb2*Vb2))/2)* DC * cross_section(j);
+    D= 1/2*((AD *(Vb2*Vb2))/2)* DC * balls(j).cross_ref;
     vx = Vb2*cosd(d_angle)*sind(d_angle);
     v0y = Vb2 * cosd(h_angle)-D;
     v0z = Vb2 * sind(h_angle);
@@ -84,11 +88,11 @@ for j = 1:3
     x = vx.*t;
     y = y_initial+v0y.*t;
     z = v0z.*t-0.5*G*(t.^2);
-    h = animatedline('LineWidth', 2);
+    h = animatedline('LineWidth', 2,'color',balls(j).color);
     for i = 1:length(t)
         % Calculate the position
         addpoints(h,x(i),y(i),z(i));
-        head=scatter3(x(i),y(i),z(i),bsizes(j));
+        head=scatter3(x(i),y(i),z(i),balls(j).sized,'MarkerFaceColor',balls(j).color);
         drawnow;
         pause(0.2)
         delete(head)

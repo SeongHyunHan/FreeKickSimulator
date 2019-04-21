@@ -2,6 +2,7 @@ classdef Ball
    properties
        mass
        cross_ref  
-       sized   
+       sized
+       color   
     end
 end
