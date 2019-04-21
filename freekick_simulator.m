@@ -1,23 +1,40 @@
- 
-clear;
+ clear;
 
+import Ball.*
+%balls
+ballSize5=Ball;
+ballSize4=Ball;
+ballSize3=Ball;
+% ball masses divided by 10
+ballSize5.mass=6.883185;
+ballSize4.mass=5.893;
+ballSize3.mass=4.699;
+% ball cross sections in meters
+ballSize3.cross_ref=0.027759;
+ballSize4.cross_ref=0.032365;
+ballSize5.cross_ref=0.036644;
+% ball sizes in inch
+ballSize5.sized=21.6;
+ballSize4.sized=20.3;
+ballSize3.sized=18.8;
+
+bsizes=[ballSize3.sized,ballSize4.sized,ballSize5.sized]
 disp("Free Kick Simulator");
 
 % Get input from the user
 Vf1 = input('Enter velocity for the kick: '); % Velocity of the foot before Kick 
 h_angle = input('Enter angle for height of the kick: ');
 d_angle = input('Enter the angle for direction of the kick: ');
-Vw = input('Enter the velocity for the wind resistance: ');
 
 % Constant Variable
 AD = 1.2;       % Air Density at Sea Level (kg/m^3)
-DC = 0.8;       % Drag Coefficient
-cross_section = 2.5;  % Cross section area of a soccer ball
+DC = 0.25;       % Drag Coefficient
+cross_section =[ballSize3.cross_ref	; ballSize4.cross_ref;ballSize5.cross_ref];  % Cross section area of a soccer ball
 G = 9.81;              % Gravity
-D = 1/2*AD * DC * cross_section * (Vw^2); % Drag Calculation
+% D = 1/2*AD * DC * cross_section; % Drag Calculation
 t = 0:0.1:3; % Time
 
-ball_mass = [4.699; 5.893; 6.883185 ];      % Mass of the Ball (varies in size)
+ball_mass = [ballSize3.mass; ballSize4.mass; ballSize5.mass ];      % Mass of the Ball (varies in size)
 foot_mass = 1.43;      % Mass of the Foot
 e = 0.68;       % Coefficient 
 Vf2 = 1;            % Velocity of the foot after Kick
@@ -58,6 +75,8 @@ y_initial = -25;
 for j = 1:3
     % Calculate the Velocity respect to angle
     Vb2 = (Vf1 * (foot_mass * (1+ e)) + Vb1 * (ball_mass(j) - e * foot_mass)) / (foot_mass + ball_mass(j)); % Velocity of the ball after Kick
+ 
+    D= 1/2*((AD *(Vb2*Vb2))/2)* DC * cross_section(j);
     vx = Vb2*cosd(d_angle)*sind(d_angle);
     v0y = Vb2 * cosd(h_angle)-D;
     v0z = Vb2 * sind(h_angle);
@@ -69,7 +88,7 @@ for j = 1:3
     for i = 1:length(t)
         % Calculate the position
         addpoints(h,x(i),y(i),z(i));
-        head=scatter3(x(i),y(i),z(i),50);
+        head=scatter3(x(i),y(i),z(i),bsizes(j));
         drawnow;
         pause(0.2)
         delete(head)
