@@ -55,7 +55,6 @@ y_initial = -25;
 
 for j = 1:3
     % Calculate the Velocity respect to angle
-   
     Vb2 = (Vf1 * (foot_mass * (1+ e)) + Vb1 * (ball_mass(j) - e * foot_mass)) / (foot_mass + ball_mass(j)); % Velocity of the ball after Kick
     vx = Vb2*cosd(90)*sind(90);
     v0y = Vb2 * cosd(angle)-D;
