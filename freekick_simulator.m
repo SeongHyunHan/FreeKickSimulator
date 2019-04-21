@@ -5,14 +5,16 @@ disp("Free Kick Simulator");
 
 % Get input from the user
 Vf1 = input('Enter velocity for the kick: '); % Velocity of the foot before Kick 
-angle = input('Enter angle for the kick: ');
+h_angle = input('Enter angle for height of the kick: ');
+d_angle = input('Enter the angle for direction of the kick: ');
+Vw = input('Enter the velocity for the wind resistance: ');
 
 % Constant Variable
 AD = 1.2;       % Air Density at Sea Level (kg/m^3)
 DC = 0.8;       % Drag Coefficient
 cross_section = 2.5;  % Cross section area of a soccer ball
 G = 9.81;              % Gravity
-D = AD * DC * cross_section; % Drag Calculation
+D = 1/2*AD * DC * cross_section * (Vw^2); % Drag Calculation
 t = 0:0.1:3; % Time
 
 ball_mass = [4.699; 5.893; 6.883185 ];      % Mass of the Ball (varies in size)
@@ -56,9 +58,9 @@ y_initial = -25;
 for j = 1:3
     % Calculate the Velocity respect to angle
     Vb2 = (Vf1 * (foot_mass * (1+ e)) + Vb1 * (ball_mass(j) - e * foot_mass)) / (foot_mass + ball_mass(j)); % Velocity of the ball after Kick
-    vx = Vb2*cosd(90)*sind(90);
-    v0y = Vb2 * cosd(angle)-D;
-    v0z = Vb2 * sind(angle);
+    vx = Vb2*cosd(d_angle)*sind(d_angle);
+    v0y = Vb2 * cosd(h_angle)-D;
+    v0z = Vb2 * sind(h_angle);
     vz = v0z-G*t;
     x = vx.*t;
     y = y_initial+v0y.*t;
@@ -67,7 +69,7 @@ for j = 1:3
     for i = 1:length(t)
         % Calculate the position
         addpoints(h,x(i),y(i),z(i));
-        head=scatter3(x(i),y(i),z(i),500);
+        head=scatter3(x(i),y(i),z(i),50);
         drawnow;
         pause(0.2)
         delete(head)
