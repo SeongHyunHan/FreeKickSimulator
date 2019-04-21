@@ -3,6 +3,7 @@ classdef Ball
        mass
        cross_ref  
        sized
-       color   
+       color 
+       name  
     end
 end

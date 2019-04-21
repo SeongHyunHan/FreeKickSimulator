@@ -21,10 +21,6 @@ ballSize3.sized=18.8;
 ballSize5.color='r';
 ballSize4.color='b';
 ballSize3.color='g';
-% ball
-ballSize5.name='Ball size 5';
-ballSize4.name='Ball size 4';
-ballSize3.name='Ball size 3';
 balls=[ballSize3;ballSize4;ballSize5];
 % bsizes=[ballSize3.sized,ballSize4.sized,ballSize5.sized];
 disp("Free Kick Simulator");
@@ -103,9 +99,8 @@ for j = 1:3
       
 
 
-        if x(i)>=-8 && x(i)<=8 && y(i)<=18 && y(i)>16 &&z(i)>=0 &&z(i)<=8
-            disp('goal with');
-            disp(balls(j).name);
+        if x(i)>=-8 && x(i)<=8 && y(i)<=17.67 && y=(i)>10 &&z(i)>=0 &&z(i)<=8
+            disp('goal')
         end
     end
 end 
