@@ -10,13 +10,13 @@ ballSize5.mass=6.883185;
 ballSize4.mass=5.893;
 ballSize3.mass=4.699;
 % ball cross sections in meters
-ballSize3.cross_ref=0.027759;
-ballSize4.cross_ref=0.032365;
-ballSize5.cross_ref=0.036644;
+ballSize3.cross_section=0.027759;
+ballSize4.cross_section=0.032365;
+ballSize5.cross_section=0.036644;
 % ball sizes in inch
-ballSize5.sized=21.6;
-ballSize4.sized=20.3;
-ballSize3.sized=18.8;
+ballSize5.circumference=21.6;
+ballSize4.circumference=20.3;
+ballSize3.circumference=18.8;
 % ball color
 ballSize5.color='r';
 ballSize4.color='b';
@@ -26,7 +26,7 @@ ballSize5.name='Ball size 5';
 ballSize4.name='Ball size 4';
 ballSize3.name='Ball size 3';
 balls=[ballSize3;ballSize4;ballSize5];
-% bsizes=[ballSize3.sized,ballSize4.sized,ballSize5.sized];
+% bsizes=[ballSize3.circumference,ballSize4.circumference,ballSize5.circumference];
 disp("Free Kick Simulator");
 
 % Get input from the user
@@ -37,7 +37,7 @@ d_angle = input('Enter the angle for direction of the kick: ');
 % Constant Variable
 AD = 1.2;       % Air Density at Sea Level (kg/m^3)
 DC = 0.25;       % Drag Coefficient
-% cross_section =[ballSize3.cross_ref	; ballSize4.cross_ref;ballSize5.cross_ref];  % Cross section area of a soccer ball
+% cross_section =[ballSize3.cross_section	; ballSize4.cross_section;ballSize5.cross_section];  % Cross section area of a soccer ball
 G = 9.81;              % Gravity
 % D = 1/2*AD * DC * cross_section; % Drag Calculation
 t = 0:0.1:3; % Time
@@ -84,7 +84,7 @@ for j = 1:3
     % Calculate the Velocity respect to angle
     Vb2 = (Vf1 * (foot_mass * (1+ e)) + Vb1 * (balls(j).mass - e * foot_mass)) / (foot_mass + balls(j).mass); % Velocity of the ball after Kick
  
-    D= 1/2*((AD *(Vb2*Vb2))/2)* DC * balls(j).cross_ref;
+    D= 1/2*((AD *(Vb2*Vb2))/2)* DC * balls(j).cross_section;
     vx = Vb2*cosd(d_angle)*sind(d_angle);
     v0y = Vb2 * cosd(h_angle)-D;
     v0z = Vb2 * sind(h_angle);
@@ -96,7 +96,7 @@ for j = 1:3
     for i = 1:length(t)
         % Calculate the position
         addpoints(h,x(i),y(i),z(i));
-        head=scatter3(x(i),y(i),z(i),balls(j).sized,'MarkerFaceColor',balls(j).color);
+        head=scatter3(x(i),y(i),z(i),balls(j).circumference,'MarkerFaceColor',balls(j).color);
         drawnow;
         pause(0.2)
         delete(head)

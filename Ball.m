@@ -1,8 +1,8 @@
 classdef Ball
    properties
        mass
-       cross_ref  
-       sized
+       cross_section 
+       circumference
        color 
        name  
     end
